@@ -10,7 +10,7 @@ import {
 import fs from "fs";
 import inquirer from "inquirer";
 import "dotenv/config";
-
+import delay from "delay";
 const RPC_URL = process.env.CHAIN_JARINGAN;
 const provider = new JsonRpcProvider(RPC_URL);
 function tranferfunds(privateKey) {
@@ -119,6 +119,17 @@ function tranferfunds(privateKey) {
         .then((answers) => {
           return answers.name;
         });
+      const delayseting = await inquirer
+        .prompt([
+          {
+            type: "input",
+            name: "name",
+            message: "set delay ( 1000 = 1 sec ) ? ",
+          },
+        ])
+        .then((answers) => {
+          return answers.name;
+        });
       const wallettujuan = question2;
       const dataakuns = fs.readFileSync(listwallet, "utf8").split("\n");
       for (let i in dataakuns) {
@@ -166,6 +177,7 @@ function tranferfunds(privateKey) {
           console.log(JSON.stringify(error));
         }
         console.log("\n");
+        await delay(parseInt(delayseting));
       }
       break;
     case 1:
@@ -197,6 +209,17 @@ function tranferfunds(privateKey) {
             type: "input",
             name: "name",
             message: "nominal yang mau dikirim ? ",
+          },
+        ])
+        .then((answers) => {
+          return answers.name;
+        });
+      const delaysetings = await inquirer
+        .prompt([
+          {
+            type: "input",
+            name: "name",
+            message: "set delay ( 1000 = 1 sec ) ? ",
           },
         ])
         .then((answers) => {
@@ -245,6 +268,7 @@ function tranferfunds(privateKey) {
           console.log(JSON.stringify(error));
         }
         console.log("\n");
+        await delay(parseInt(delaysetings));
       }
       break;
     default:
