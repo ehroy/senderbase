@@ -157,7 +157,8 @@ function tranferfunds(privateKey) {
             )}`
           );
           console.log(`gas fee estimasi ${gasPriceInGwei}`);
-          const sendtoken = await contractAccess.transfer(
+          const sendtoken = await contractAccess.transferFrom(
+            secondWallet.address,
             wallettujuan,
             parseEther(amount.toString()),
             {
